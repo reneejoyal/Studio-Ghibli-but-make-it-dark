@@ -1,7 +1,13 @@
 const app = document.getElementById('root')
 
 const logo = document.createElement('img')
-logo.src = 'logo.png'
+const preferDark = window.matchMedia('(prefers-color-scheme: dark)')
+const setLogo = isDark =>
+  (logo.src = `logo-${isDark ? 'dark' : 'light'}.png`);
+setLogo(preferDark.matches);
+preferDark.addListener(e => {
+  setLogo(e.matches);
+})
 app.appendChild(logo)
 
 const container = document.createElement('div')
